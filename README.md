@@ -9,4 +9,4 @@ The analysis was done as following:
 3. The alignment result was converted to VCF using SNP-sites (only cared about SNVs)
 4. The strains with the exactly same variations were deduplicated.
 5. The lineage network was constructed using Cassiopeia - unlike the phylogenetic tree, one node can have multiple children.
-6. The network was visualized using NetworkX and Matplotlib
+6. The network was visualized using NetworkX and Matplotlib (and ForceAtlas2 for prettier embedding).
