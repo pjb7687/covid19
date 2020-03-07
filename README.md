@@ -10,3 +10,4 @@ The analysis was done as following:
 4. The strains with the exactly same variations were deduplicated.
 5. The lineage network was constructed using Cassiopeia - unlike the phylogenetic tree, one node can have multiple children.
 6. The network was visualized using NetworkX and Matplotlib (and ForceAtlas2 for a prettier embedding).
+7. The network was exported to JSON and visualized using Vis.js.

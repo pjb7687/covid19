@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <title>COVID-19 network reconstructed by Cassiopeia</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"></script>
+  <style type="text/css">
+    #covid19network {
+      width: 800px;
+      height: 600px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+<div id="covid19network"></div>
+<div id="nodedetail"></div>
+    
+<script type="text/javascript" src="network_data.js"></script>
+<script type="text/javascript">
+  // create a network
+  var container = document.getElementById('covid19network');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {};
+  var network = new vis.Network(container, data, options);
+    
+  var detailwindow = document.getElementById('nodedetail');
+  network.on('click', function (properties) {
+        var nodeid = properties.nodes[0];
+        if (nodeid) {
+            var innerhtml = "";
+            if (nodeid.includes("Unknown")) {
+                innerhtml += "This is a possibly unidentified strain, predicted by the algorithm.";
+            } else {
+                innerhtml += "The same strains:\<br>";
+                for (var i = 0; i < node_details[nodeid].length; i++) {
+                    innerhtml += node_details[nodeid][i][0] + " (" + node_details[nodeid][i][1] + ", " + node_details[nodeid][i][2] + ")<br>";
+                }
+            }
+            detailwindow.innerHTML = innerhtml;
+        }
+  });
+</script>
+
+
+</body>
+</html>
