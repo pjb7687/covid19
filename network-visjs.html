@@ -12,7 +12,8 @@
   </style>
 </head>
 <body>
-<p>Click on the node for more details.</p>
+<div id="lastupdated"></div>
+<p>Click on the nodes for more details.</p>
 <div id="covid19network"></div>
 <div id="nodedetail"></div>
     
@@ -20,6 +21,8 @@
 <script type="text/javascript">
   // create a network
   var container = document.getElementById('covid19network');
+  var lastupdated = document.getElementById('lastupdated');
+  lastupdated.innerHTML = "<p>Last updated: " + updated_datetime + "</p>";
   var data = {
     nodes: nodes,
     edges: edges
