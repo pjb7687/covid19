@@ -14,24 +14,28 @@
 <body>
 <div id="lastupdated"></div>
 <p>Click on the nodes for more details.</p>
+<p>Color by country: <select id="country" onchange="changeNodeColors(this);">
+        <option value="">All</option>
+    </select>
+</p>
 <div id="covid19network"></div>
 <div id="nodedetail"></div>
     
 <script type="text/javascript" src="network_data.js"></script>
 <script type="text/javascript">
-  // create a network
-  var container = document.getElementById('covid19network');
-  var lastupdated = document.getElementById('lastupdated');
-  lastupdated.innerHTML = "<p>Last updated: " + updated_datetime + "</p>";
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {};
-  var network = new vis.Network(container, data, options);
-    
-  var detailwindow = document.getElementById('nodedetail');
-  network.on('click', function (properties) {
+    // create a network
+    var container = document.getElementById('covid19network');
+    var lastupdated = document.getElementById('lastupdated');
+    lastupdated.innerHTML = "<p>Last updated: " + updated_datetime + "</p>";
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+
+    var detailwindow = document.getElementById('nodedetail');
+    network.on('click', function (properties) {
         var nodeid = properties.nodes[0];
         if (nodeid) {
             var innerhtml = "";
@@ -45,7 +49,57 @@
             }
             detailwindow.innerHTML = innerhtml;
         }
-  });
+    });
+    var country_selector = document.getElementById('country');
+    for (var i=0; i<unique_countries.length; i++) {
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode(unique_countries[i]));
+        opt.value = unique_countries[i]; 
+        country_selector.appendChild(opt); 
+    }
+    
+    function clearNodeColors() {
+        var defaultColor = "#97c2fc";
+        var defaultHighlightColor = "#d2e5ff";
+        var defaultBorderColor = "#2b7ce9";
+        var all_nodes = [];
+        nodes.forEach(function (node) {
+            node.color = {
+                border: defaultBorderColor,
+                background: defaultColor,
+                highlight: {
+                    border: defaultBorderColor,
+                    background: defaultHighlightColor
+                }
+            };
+            all_nodes.push(node);
+        });
+        nodes.update(all_nodes);
+    }
+    
+    function changeNodeColors(dropdown) {
+        var country = dropdown.value;
+        var selectedColor = "#ed7d31";
+        var selectedBorderColor = "#ae5a21";
+        var selectedHighlightColor = "#f3a876";
+        clearNodeColors();
+        if (country) {
+            found_nodes = [];
+            nodes.forEach(function (node) {
+                if (!node.id.includes("Unknown") && node_countries[node.id].includes(country))
+                    node.color = {
+                        border: selectedBorderColor,
+                        background: selectedColor,
+                        highlight: {
+                            border: selectedBorderColor,
+                            background: selectedHighlightColor
+                        }
+                    };
+                    found_nodes.push(node);
+            });
+            nodes.update(found_nodes);
+        }
+    }
 </script>
 
 
