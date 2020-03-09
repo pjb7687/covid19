@@ -1,5 +1,5 @@
 
-var updated_datetime = "09 Mar 2020, 21:53 (CET)";
+var updated_datetime = "09 Mar 2020, 22:35 (CET)";
 
 var unique_countries = ["Australia", "Belgium", "Brazil", "Cambodia", "Canada", "China", "Finland", "France", "Germany", "Hong Kong", "India", "Italy", "Japan", "Luxembourg", "Mexico", "Nepal", "Netherlands", "New Zealand", "Nigeria", "Portugal", "Singapore", "South Korea", "Sweden", "Switzerland", "Taiwan", "Thailand", "USA", "United Kingdom", "Vietnam"];
 
